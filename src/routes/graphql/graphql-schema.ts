@@ -1,6 +1,6 @@
 import { GraphQLObjectType, GraphQLSchema } from 'graphql';
-import { userType } from './entities/user/types.js';
-import { userQueries } from './entities/user/queries.js';
+import { userType } from './entities/user/user.types.js';
+import { userQueries } from './entities/user/user.queries.js';
 
 const queries: GraphQLObjectType = new GraphQLObjectType({
   name: 'Query',
