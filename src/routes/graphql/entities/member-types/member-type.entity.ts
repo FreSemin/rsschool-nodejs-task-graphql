@@ -2,11 +2,11 @@ import { PrismaClient } from '.prisma/client';
 
 export class MemberTypeEntity {
   static async findAll(prisma: PrismaClient) {
-    return await prisma.user.findMany();
+    return await prisma.memberType.findMany();
   }
 
   static async findOne(id: string, prisma: PrismaClient) {
-    return await prisma.user.findUnique({
+    return await prisma.memberType.findUnique({
       where: {
         id,
       },
