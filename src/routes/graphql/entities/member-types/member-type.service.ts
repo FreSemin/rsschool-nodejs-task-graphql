@@ -1,15 +1,12 @@
 import { PrismaClient } from '.prisma/client';
+import { MemberTypeEntity } from './member-type.entity.js';
 
 export class MemberTypeService {
   static async findAll(prisma: PrismaClient) {
-    return await prisma.memberType.findMany();
+    return await MemberTypeEntity.findAll(prisma);
   }
 
   static async findOne(id: string, prisma: PrismaClient) {
-    return await prisma.memberType.findUnique({
-      where: {
-        id,
-      },
-    });
+    return await MemberTypeEntity.findOne(id, prisma);
   }
 }
