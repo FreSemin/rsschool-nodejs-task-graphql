@@ -3,12 +3,13 @@ import { userType } from './user.types.js';
 import { Context } from '../../models/context.js';
 import { UUIDType } from '../../types/uuid.js';
 import { WithId } from '../../models/args.js';
+import { UserService } from './user.service.js';
 
 export const userQueries = {
   users: {
     type: new GraphQLList(userType),
     resolve: async (_, args, { prisma }: Context) => {
-      return await prisma.user.findMany();
+      return await UserService.findAll(prisma);
     },
   },
   user: {
@@ -19,11 +20,7 @@ export const userQueries = {
       },
     },
     resolve: async (_, { id }: WithId, { prisma }: Context) => {
-      return await prisma.user.findUnique({
-        where: {
-          id,
-        },
-      });
+      return await UserService.findOne(id, prisma);
     },
   },
 };
