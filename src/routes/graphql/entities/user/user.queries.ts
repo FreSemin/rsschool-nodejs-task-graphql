@@ -12,6 +12,7 @@ export const userQueries = {
       return await UserService.findAll(prisma);
     },
   },
+
   user: {
     type: userType,
     args: {
