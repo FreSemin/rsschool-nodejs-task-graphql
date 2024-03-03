@@ -1,6 +1,7 @@
 import { GraphQLObjectType, GraphQLNonNull, GraphQLString, GraphQLFloat } from 'graphql';
 
-export const userType = new GraphQLObjectType({
+// TODO: rename to upperCase
+export const UserType = new GraphQLObjectType({
   name: 'User',
   fields: () => ({
     id: {

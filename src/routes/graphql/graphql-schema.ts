@@ -1,5 +1,5 @@
 import { GraphQLObjectType, GraphQLSchema } from 'graphql';
-import { userType } from './entities/user/user.type.js';
+import { UserType } from './entities/user/user.type.js';
 import { userQueries } from './entities/user/user.queries.js';
 import { MemberType } from './entities/member-types/member-type.type.js';
 import { memberTypeQueries } from './entities/member-types/member-type.queries.js';
@@ -17,7 +17,7 @@ const queries: GraphQLObjectType = new GraphQLObjectType({
 
 const graphQLSchema: GraphQLSchema = new GraphQLSchema({
   query: queries,
-  types: [userType, MemberType, PostType],
+  types: [UserType, MemberType, PostType],
 });
 
 export default graphQLSchema;
