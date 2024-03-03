@@ -1,15 +1,12 @@
 import { PrismaClient } from '.prisma/client';
+import { PostEntity } from './post.entity.js';
 
 export class PostService {
   static async findAll(prisma: PrismaClient) {
-    return await prisma.post.findMany();
+    return await PostEntity.findAll(prisma);
   }
 
   static async findOne(id: string, prisma: PrismaClient) {
-    return await prisma.post.findUnique({
-      where: {
-        id,
-      },
-    });
+    return await PostEntity.findOne(id, prisma);
   }
 }
