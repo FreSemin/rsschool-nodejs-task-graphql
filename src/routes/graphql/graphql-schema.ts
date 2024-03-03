@@ -1,5 +1,5 @@
 import { GraphQLObjectType, GraphQLSchema } from 'graphql';
-import { userType } from './entities/user/user.types.js';
+import { userType } from './entities/user/user.type.js';
 import { userQueries } from './entities/user/user.queries.js';
 import { MemberType } from './entities/member-types/member-type.type.js';
 import { memberTypeQueries } from './entities/member-types/member-type.queries.js';

@@ -1,5 +1,5 @@
 import { GraphQLList, GraphQLNonNull } from 'graphql';
-import { userType } from './user.types.js';
+import { userType } from './user.type.js';
 import { Context } from '../../models/context.js';
 import { UUIDType } from '../../types/uuid.js';
 import { WithId } from '../../models/args.js';
