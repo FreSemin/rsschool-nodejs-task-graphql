@@ -8,12 +8,9 @@ import {
 } from 'graphql';
 import { UUIDType } from '../../types/uuid.js';
 import { ProfileType } from '../profile/profile.type.js';
-import { ProfileService } from '../profile/profile.service.js';
 import { User } from '@prisma/client';
 import { Context } from '../../models/context.js';
 import { PostType } from '../post/post.type.js';
-import { PostService } from '../post/post.service.js';
-import { UserService } from './user.service.js';
 
 export const UserType: GraphQLObjectType = new GraphQLObjectType({
   name: 'User',
@@ -30,29 +27,29 @@ export const UserType: GraphQLObjectType = new GraphQLObjectType({
 
     profile: {
       type: ProfileType,
-      resolve: async (user: User, args, { prisma }: Context) => {
-        return await ProfileService.findOneByUserId(user.id, prisma);
+      resolve: async (user: User, args, { dataLoaders }: Context) => {
+        return dataLoaders.profileLoader.load(user.id);
       },
     },
 
     posts: {
       type: new GraphQLList(PostType),
-      resolve: async (user: User, args, { prisma }: Context) => {
-        return await PostService.findAllByUserId(user.id, prisma);
+      resolve: async (user: User, args, { dataLoaders }: Context) => {
+        return dataLoaders.postLoader.load(user.id);
       },
     },
 
     userSubscribedTo: {
       type: new GraphQLList(UserType),
-      resolve: async (user: User, args, { prisma }: Context) => {
-        return await UserService.findUserSubscribedToUsers(user.id, prisma);
+      resolve: async (user: User, args, { dataLoaders }: Context) => {
+        return dataLoaders.userSubscribedToLoader.load(user.id);
       },
     },
 
     subscribedToUser: {
       type: new GraphQLList(UserType),
-      resolve: async (user: User, args, { prisma }: Context) => {
-        return await UserService.findSubscribedToUserUsers(user.id, prisma);
+      resolve: async (user: User, args, { dataLoaders }: Context) => {
+        return dataLoaders.subscribedToUserLoader.load(user.id);
       },
     },
   }),
