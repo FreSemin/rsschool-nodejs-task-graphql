@@ -18,7 +18,6 @@ export const PostType: GraphQLObjectType = new GraphQLObjectType({
     content: {
       type: GraphQLString,
     },
-    // TODO: add author fields
   }),
 });
 

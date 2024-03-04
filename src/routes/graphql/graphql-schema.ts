@@ -37,7 +37,6 @@ const mutations: GraphQLObjectType = new GraphQLObjectType({
 const graphQLSchema: GraphQLSchema = new GraphQLSchema({
   query: queries,
   mutation: mutations,
-  // TODO: load types as queries
   types: [
     UserType,
     MemberType,
