@@ -12,4 +12,12 @@ export class PostEntity {
       },
     });
   }
+
+  static async findAllByUserId(userId: string, prisma: PrismaClient) {
+    return await prisma.post.findMany({
+      where: {
+        authorId: userId,
+      },
+    });
+  }
 }

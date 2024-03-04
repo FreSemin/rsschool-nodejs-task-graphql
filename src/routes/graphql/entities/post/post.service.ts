@@ -9,4 +9,8 @@ export class PostService {
   static async findOne(id: string, prisma: PrismaClient) {
     return await PostEntity.findOne(id, prisma);
   }
+
+  static async findAllByUserId(userId: string, prisma: PrismaClient) {
+    return await PostEntity.findAllByUserId(userId, prisma);
+  }
 }
