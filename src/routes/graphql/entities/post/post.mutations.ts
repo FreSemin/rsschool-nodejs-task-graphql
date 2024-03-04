@@ -1,5 +1,5 @@
 import { GraphQLBoolean, GraphQLNonNull } from 'graphql';
-import { CreatePostInput, PostType } from './post.type.js';
+import { ChangePostInput, CreatePostInput, PostType } from './post.type.js';
 import { InputDto, WithId } from '../../models/args.js';
 import { Prisma } from '@prisma/client';
 import { Context } from '../../models/context.js';
@@ -20,6 +20,25 @@ export const postMutations = {
       { prisma }: Context,
     ) => {
       return await PostService.create(dto, prisma);
+    },
+  },
+
+  changePost: {
+    type: PostType,
+    args: {
+      id: {
+        type: new GraphQLNonNull(UUIDType),
+      },
+      dto: {
+        type: ChangePostInput,
+      },
+    },
+    resolve: async (
+      _,
+      { id, dto }: { id: string; dto: Prisma.PostUpdateInput },
+      { prisma }: Context,
+    ) => {
+      return await PostService.update(id, dto, prisma);
     },
   },
 
