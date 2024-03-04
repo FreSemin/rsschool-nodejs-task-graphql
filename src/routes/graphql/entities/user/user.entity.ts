@@ -1,4 +1,5 @@
 import { PrismaClient } from '.prisma/client';
+import { Prisma } from '@prisma/client';
 
 export class UserEntity {
   static async findAll(prisma: PrismaClient) {
@@ -33,5 +34,9 @@ export class UserEntity {
         subscribedToUser: true,
       },
     });
+  }
+
+  static async create(userDto: Prisma.UserCreateInput, prisma: PrismaClient) {
+    return await prisma.user.create({ data: userDto });
   }
 }

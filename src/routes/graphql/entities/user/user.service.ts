@@ -1,5 +1,6 @@
 import { PrismaClient } from '.prisma/client';
 import { UserEntity } from './user.entity.js';
+import { Prisma } from '@prisma/client';
 
 export class UserService {
   static async findAll(prisma: PrismaClient) {
@@ -36,5 +37,9 @@ export class UserService {
     });
 
     return await Promise.all([...subscribers]);
+  }
+
+  static async create(userDto: Prisma.UserCreateInput, prisma: PrismaClient) {
+    return await UserEntity.create(userDto, prisma);
   }
 }
