@@ -47,5 +47,12 @@ export const UserType = new GraphQLObjectType({
         return await UserService.findUserSubscribedToUsers(user.id, prisma);
       },
     },
+
+    subscribedToUser: {
+      type: new GraphQLList(UserType),
+      resolve: async (user: User, args, { prisma }: Context) => {
+        return await UserService.findSubscribedToUserUsers(user.id, prisma);
+      },
+    },
   }),
 });

@@ -23,4 +23,18 @@ export class UserService {
 
     return await Promise.all([...subscriptions]);
   }
+
+  static async findSubscribedToUserUsers(id: string, prisma: PrismaClient) {
+    const user = await UserEntity.findSubscribedToUser(id, prisma);
+
+    if (!user) {
+      return null;
+    }
+
+    const subscribers = user.subscribedToUser.map(async (subscriber) => {
+      return UserService.findOne(subscriber.subscriberId, prisma);
+    });
+
+    return await Promise.all([...subscribers]);
+  }
 }
