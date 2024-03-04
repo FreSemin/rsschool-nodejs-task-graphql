@@ -1,0 +1,49 @@
+import { PrismaClient } from '.prisma/client';
+import { Prisma } from '@prisma/client';
+
+export class ProfileEntity {
+  static async findAll(prisma: PrismaClient) {
+    return await prisma.profile.findMany();
+  }
+
+  static async findOne(id: string, prisma: PrismaClient) {
+    return await prisma.profile.findUnique({
+      where: {
+        id,
+      },
+    });
+  }
+
+  static async findOneByUserId(userId: string, prisma: PrismaClient) {
+    return await prisma.profile.findUnique({
+      where: {
+        userId,
+      },
+    });
+  }
+
+  static async create(profileDto: Prisma.ProfileCreateInput, prisma: PrismaClient) {
+    return await prisma.profile.create({ data: profileDto });
+  }
+
+  static async update(
+    id: string,
+    profileDto: Prisma.ProfileUpdateInput,
+    prisma: PrismaClient,
+  ) {
+    return await prisma.profile.update({
+      where: {
+        id,
+      },
+      data: profileDto,
+    });
+  }
+
+  static async delete(id: string, prisma: PrismaClient) {
+    return await prisma.profile.delete({
+      where: {
+        id,
+      },
+    });
+  }
+}
