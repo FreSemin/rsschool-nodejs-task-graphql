@@ -6,9 +6,10 @@ import { memberTypeQueries } from './entities/member-types/member-type.queries.j
 import { postQueries } from './entities/post/post.queries.js';
 import { CreatePostInput, PostType } from './entities/post/post.type.js';
 import { profileQueries } from './entities/profile/profile.queries.js';
-import { ProfileType } from './entities/profile/profile.type.js';
+import { CreateProfileInput, ProfileType } from './entities/profile/profile.type.js';
 import { userMutations } from './entities/user/user.mutations.js';
 import { postMutations } from './entities/post/post.mutations.js';
+import { profileMutations } from './entities/profile/profile.mutations.js';
 
 const queries: GraphQLObjectType = new GraphQLObjectType({
   name: 'Query',
@@ -25,6 +26,7 @@ const mutations: GraphQLObjectType = new GraphQLObjectType({
   fields: () => ({
     ...userMutations,
     ...postMutations,
+    ...profileMutations,
   }),
 });
 
@@ -32,7 +34,15 @@ const graphQLSchema: GraphQLSchema = new GraphQLSchema({
   query: queries,
   mutation: mutations,
   // TODO: load types as queries
-  types: [UserType, MemberType, PostType, ProfileType, CreateUserInput, CreatePostInput],
+  types: [
+    UserType,
+    MemberType,
+    PostType,
+    ProfileType,
+    CreateUserInput,
+    CreatePostInput,
+    CreateProfileInput,
+  ],
 });
 
 export default graphQLSchema;
