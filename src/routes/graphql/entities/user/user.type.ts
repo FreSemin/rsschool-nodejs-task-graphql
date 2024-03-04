@@ -14,7 +14,7 @@ import { PostType } from '../post/post.type.js';
 import { PostService } from '../post/post.service.js';
 import { UserService } from './user.service.js';
 
-export const UserType = new GraphQLObjectType({
+export const UserType: GraphQLObjectType = new GraphQLObjectType({
   name: 'User',
   fields: () => ({
     id: {

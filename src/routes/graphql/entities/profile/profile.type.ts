@@ -5,7 +5,7 @@ import { Profile } from '@prisma/client';
 import { Context } from '../../models/context.js';
 import { MemberTypeService } from '../member-types/member-type.service.js';
 
-export const ProfileType = new GraphQLObjectType({
+export const ProfileType: GraphQLObjectType = new GraphQLObjectType({
   name: 'ProfileType',
   fields: () => ({
     id: {
