@@ -26,6 +26,19 @@ export class ProfileEntity {
     return await prisma.profile.create({ data: profileDto });
   }
 
+  static async update(
+    id: string,
+    profileDto: Prisma.ProfileUpdateInput,
+    prisma: PrismaClient,
+  ) {
+    return await prisma.profile.update({
+      where: {
+        id,
+      },
+      data: profileDto,
+    });
+  }
+
   static async delete(id: string, prisma: PrismaClient) {
     return await prisma.profile.delete({
       where: {
