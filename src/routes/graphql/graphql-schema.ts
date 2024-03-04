@@ -1,5 +1,5 @@
 import { GraphQLObjectType, GraphQLSchema } from 'graphql';
-import { CreateUserInput, UserType } from './entities/user/user.type.js';
+import { ChangeUserInput, CreateUserInput, UserType } from './entities/user/user.type.js';
 import { userQueries } from './entities/user/user.queries.js';
 import { MemberType } from './entities/member-types/member-type.type.js';
 import { memberTypeQueries } from './entities/member-types/member-type.queries.js';
@@ -42,6 +42,7 @@ const graphQLSchema: GraphQLSchema = new GraphQLSchema({
     CreateUserInput,
     CreatePostInput,
     CreateProfileInput,
+    ChangeUserInput,
   ],
 });
 

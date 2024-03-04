@@ -1,5 +1,5 @@
 import { GraphQLBoolean, GraphQLNonNull } from 'graphql';
-import { CreateUserInput, UserType } from './user.type.js';
+import { ChangeUserInput, CreateUserInput, UserType } from './user.type.js';
 import { Prisma } from '@prisma/client';
 import { Context } from '../../models/context.js';
 import { UserService } from './user.service.js';
@@ -20,6 +20,25 @@ export const userMutations = {
       { prisma }: Context,
     ) => {
       return await UserService.create(dto, prisma);
+    },
+  },
+
+  changeUser: {
+    type: UserType,
+    args: {
+      id: {
+        type: new GraphQLNonNull(UUIDType),
+      },
+      dto: {
+        type: ChangeUserInput,
+      },
+    },
+    resolve: async (
+      _,
+      { id, dto }: { id: string; dto: Prisma.UserUpdateInput },
+      { prisma }: Context,
+    ) => {
+      return await UserService.update(id, dto, prisma);
     },
   },
 
