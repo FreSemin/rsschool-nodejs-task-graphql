@@ -9,7 +9,6 @@ import { UUIDType } from '../../types/uuid.js';
 import { MemberType } from '../member-types/member-type.type.js';
 import { Profile } from '@prisma/client';
 import { Context } from '../../models/context.js';
-import { MemberTypeService } from '../member-types/member-type.service.js';
 import { EMemberTypeId } from '../member-types/member-type.models.js';
 
 export const ProfileType: GraphQLObjectType = new GraphQLObjectType({
@@ -27,8 +26,8 @@ export const ProfileType: GraphQLObjectType = new GraphQLObjectType({
 
     memberType: {
       type: MemberType,
-      resolve: async (profile: Profile, args, { prisma }: Context) => {
-        return await MemberTypeService.findOne(profile.memberTypeId, prisma);
+      resolve: async (profile: Profile, args, { dataLoaders }: Context) => {
+        return await dataLoaders.memberTypeLoader.load(profile.memberTypeId);
       },
     },
   }),
