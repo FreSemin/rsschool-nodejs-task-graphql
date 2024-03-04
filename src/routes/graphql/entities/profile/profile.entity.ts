@@ -12,4 +12,12 @@ export class ProfileEntity {
       },
     });
   }
+
+  static async findOneByUserId(userId: string, prisma: PrismaClient) {
+    return await prisma.profile.findUnique({
+      where: {
+        userId,
+      },
+    });
+  }
 }
