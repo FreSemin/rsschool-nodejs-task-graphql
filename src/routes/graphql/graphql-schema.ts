@@ -6,7 +6,11 @@ import { memberTypeQueries } from './entities/member-types/member-type.queries.j
 import { postQueries } from './entities/post/post.queries.js';
 import { ChangePostInput, CreatePostInput, PostType } from './entities/post/post.type.js';
 import { profileQueries } from './entities/profile/profile.queries.js';
-import { CreateProfileInput, ProfileType } from './entities/profile/profile.type.js';
+import {
+  ChangeProfileInput,
+  CreateProfileInput,
+  ProfileType,
+} from './entities/profile/profile.type.js';
 import { userMutations } from './entities/user/user.mutations.js';
 import { postMutations } from './entities/post/post.mutations.js';
 import { profileMutations } from './entities/profile/profile.mutations.js';
@@ -44,6 +48,7 @@ const graphQLSchema: GraphQLSchema = new GraphQLSchema({
     CreateProfileInput,
     ChangeUserInput,
     ChangePostInput,
+    ChangeProfileInput,
   ],
 });
 

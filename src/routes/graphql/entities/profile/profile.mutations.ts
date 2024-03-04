@@ -1,5 +1,5 @@
 import { GraphQLBoolean, GraphQLNonNull } from 'graphql';
-import { CreateProfileInput, ProfileType } from './profile.type.js';
+import { ChangeProfileInput, CreateProfileInput, ProfileType } from './profile.type.js';
 import { Prisma } from '@prisma/client';
 import { Context } from '../../models/context.js';
 import { InputDto, WithId } from '../../models/args.js';
@@ -20,6 +20,25 @@ export const profileMutations = {
       { prisma }: Context,
     ) => {
       return await ProfileService.create(dto, prisma);
+    },
+  },
+
+  changeProfile: {
+    type: ProfileType,
+    args: {
+      id: {
+        type: new GraphQLNonNull(UUIDType),
+      },
+      dto: {
+        type: ChangeProfileInput,
+      },
+    },
+    resolve: async (
+      _,
+      { id, dto }: { id: string; dto: Prisma.ProfileUpdateInput },
+      { prisma }: Context,
+    ) => {
+      return await ProfileService.update(id, dto, prisma);
     },
   },
 
