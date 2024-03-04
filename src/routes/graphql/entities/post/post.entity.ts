@@ -25,4 +25,12 @@ export class PostEntity {
   static async create(postDto: Prisma.PostCreateInput, prisma: PrismaClient) {
     return await prisma.post.create({ data: postDto });
   }
+
+  static async delete(id: string, prisma: PrismaClient) {
+    return await prisma.post.delete({
+      where: {
+        id,
+      },
+    });
+  }
 }
