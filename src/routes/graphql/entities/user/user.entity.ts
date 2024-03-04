@@ -1,5 +1,6 @@
 import { PrismaClient } from '.prisma/client';
 import { Prisma } from '@prisma/client';
+import { UserSubscription } from '../../models/args.js';
 
 export class UserEntity {
   static async findAll(prisma: PrismaClient) {
@@ -53,6 +54,37 @@ export class UserEntity {
     return await prisma.user.delete({
       where: {
         id,
+      },
+    });
+  }
+
+  static async subscribeTo(subscription: UserSubscription, prisma: PrismaClient) {
+    return await prisma.user.update({
+      where: {
+        id: subscription.userId,
+      },
+      data: {
+        userSubscribedTo: {
+          create: { authorId: subscription.authorId },
+        },
+      },
+    });
+  }
+
+  static async unsubscribeFrom(subscription: UserSubscription, prisma: PrismaClient) {
+    return await prisma.user.update({
+      where: {
+        id: subscription.userId,
+      },
+      data: {
+        userSubscribedTo: {
+          delete: {
+            subscriberId_authorId: {
+              authorId: subscription.authorId,
+              subscriberId: subscription.userId,
+            },
+          },
+        },
       },
     });
   }

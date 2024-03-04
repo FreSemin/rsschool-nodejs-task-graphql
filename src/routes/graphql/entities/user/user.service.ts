@@ -1,6 +1,7 @@
 import { PrismaClient } from '.prisma/client';
 import { UserEntity } from './user.entity.js';
 import { Prisma } from '@prisma/client';
+import { UserSubscription } from '../../models/args.js';
 
 export class UserService {
   static async findAll(prisma: PrismaClient) {
@@ -49,5 +50,13 @@ export class UserService {
 
   static async delete(id: string, prisma: PrismaClient) {
     return await UserEntity.delete(id, prisma);
+  }
+
+  static async subscribeTo(subscription: UserSubscription, prisma: PrismaClient) {
+    return await UserEntity.subscribeTo(subscription, prisma);
+  }
+
+  static async unsubscribeFrom(subscription: UserSubscription, prisma: PrismaClient) {
+    return await UserEntity.unsubscribeFrom(subscription, prisma);
   }
 }
