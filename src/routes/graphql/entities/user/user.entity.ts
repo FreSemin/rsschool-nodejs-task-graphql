@@ -39,4 +39,12 @@ export class UserEntity {
   static async create(userDto: Prisma.UserCreateInput, prisma: PrismaClient) {
     return await prisma.user.create({ data: userDto });
   }
+
+  static async delete(id: string, prisma: PrismaClient) {
+    return await prisma.user.delete({
+      where: {
+        id,
+      },
+    });
+  }
 }
