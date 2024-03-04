@@ -1,5 +1,6 @@
 import { PrismaClient } from '.prisma/client';
 import { ProfileEntity } from './profile.entity.js';
+import { Prisma } from '@prisma/client';
 
 export class ProfileService {
   static async findAll(prisma: PrismaClient) {
@@ -12,5 +13,9 @@ export class ProfileService {
 
   static async findOneByUserId(userId: string, prisma: PrismaClient) {
     return await ProfileEntity.findOneByUserId(userId, prisma);
+  }
+
+  static async create(profileDto: Prisma.ProfileCreateInput, prisma: PrismaClient) {
+    return await ProfileEntity.create(profileDto, prisma);
   }
 }
