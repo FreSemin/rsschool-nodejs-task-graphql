@@ -43,6 +43,10 @@ export class UserService {
     return await UserEntity.create(userDto, prisma);
   }
 
+  static async update(id: string, userDto: Prisma.UserUpdateInput, prisma: PrismaClient) {
+    return await UserEntity.update(id, userDto, prisma);
+  }
+
   static async delete(id: string, prisma: PrismaClient) {
     return await UserEntity.delete(id, prisma);
   }

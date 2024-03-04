@@ -40,6 +40,15 @@ export class UserEntity {
     return await prisma.user.create({ data: userDto });
   }
 
+  static async update(id: string, userDto: Prisma.UserUpdateInput, prisma: PrismaClient) {
+    return await prisma.user.update({
+      where: {
+        id,
+      },
+      data: userDto,
+    });
+  }
+
   static async delete(id: string, prisma: PrismaClient) {
     return await prisma.user.delete({
       where: {
