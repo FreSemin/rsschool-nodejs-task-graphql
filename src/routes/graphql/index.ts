@@ -3,6 +3,7 @@ import { createGqlResponseSchema, gqlResponseSchema } from './schemas.js';
 import { graphql, parse, validate } from 'graphql';
 import graphQLSchema from './graphql-schema.js';
 import depthLimit from 'graphql-depth-limit';
+import { DataLoaders } from './data-loaders.js';
 
 const plugin: FastifyPluginAsyncTypebox = async (fastify) => {
   fastify.route({
@@ -27,12 +28,15 @@ const plugin: FastifyPluginAsyncTypebox = async (fastify) => {
         };
       }
 
+      const dataLoaders = DataLoaders(prisma);
+
       return await graphql({
         schema: graphQLSchema,
         source: query,
         variableValues: variables,
         contextValue: {
           prisma,
+          dataLoaders,
         },
       });
     },
