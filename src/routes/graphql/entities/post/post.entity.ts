@@ -1,4 +1,5 @@
 import { PrismaClient } from '.prisma/client';
+import { Prisma } from '@prisma/client';
 
 export class PostEntity {
   static async findAll(prisma: PrismaClient) {
@@ -19,5 +20,9 @@ export class PostEntity {
         authorId: userId,
       },
     });
+  }
+
+  static async create(postDto: Prisma.PostCreateInput, prisma: PrismaClient) {
+    return await prisma.post.create({ data: postDto });
   }
 }
