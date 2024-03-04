@@ -21,7 +21,9 @@ export const UserType = new GraphQLObjectType({
     profile: {
       type: ProfileType,
       resolve: async (user: User, args, { prisma }: Context) => {
-        return await ProfileService.findOne(user.id, prisma);
+        return await ProfileService.findOneByUserId(user.id, prisma);
+      },
+    },
       },
     },
   }),
