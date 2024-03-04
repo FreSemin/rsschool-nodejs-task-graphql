@@ -18,4 +18,8 @@ export class ProfileService {
   static async create(profileDto: Prisma.ProfileCreateInput, prisma: PrismaClient) {
     return await ProfileEntity.create(profileDto, prisma);
   }
+
+  static async delete(id: string, prisma: PrismaClient) {
+    return await ProfileEntity.delete(id, prisma);
+  }
 }
