@@ -12,4 +12,15 @@ export class UserEntity {
       },
     });
   }
+
+  static async findUserSubscribedTo(id: string, prisma: PrismaClient) {
+    return await prisma.user.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        userSubscribedTo: true,
+      },
+    });
+  }
 }

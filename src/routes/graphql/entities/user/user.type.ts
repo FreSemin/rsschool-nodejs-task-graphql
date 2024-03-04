@@ -12,6 +12,7 @@ import { User } from '@prisma/client';
 import { Context } from '../../models/context.js';
 import { PostType } from '../post/post.type.js';
 import { PostService } from '../post/post.service.js';
+import { UserService } from './user.service.js';
 
 export const UserType = new GraphQLObjectType({
   name: 'User',
@@ -37,6 +38,13 @@ export const UserType = new GraphQLObjectType({
       type: new GraphQLList(PostType),
       resolve: async (user: User, args, { prisma }: Context) => {
         return await PostService.findAllByUserId(user.id, prisma);
+      },
+    },
+
+    userSubscribedTo: {
+      type: new GraphQLList(UserType),
+      resolve: async (user: User, args, { prisma }: Context) => {
+        return await UserService.findUserSubscribedToUsers(user.id, prisma);
       },
     },
   }),
